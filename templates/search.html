@@ -1,0 +1,611 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Result {% endblock title %}
+
+{% block body %}
+
+<div class="container-fluid px-0">
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="5"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/static/images/book4.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block" style="background: #0000009e;border-radius: 84px;">
+                    <h5 style="color: currentcolor;">Unlimited Stock</h5>
+                    <p>All types of books available here</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/book2.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block" style="background: #0000009e;border-radius: 84px;">
+                    <h5 style="color: currentcolor;">Delivery in time to time</h5>
+                    <p>World biggest book shop</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/book3.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block" style="background: #0000009e;border-radius: 84px;">
+                    <h5 style="color: currentcolor;">Quality product available</h5>
+                    <p>No delivery charges apply in any purchase</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/book1.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block" style="background: #0000009e;border-radius: 84px;">
+                    <h5 style="color: currentcolor;">Always provide best services</h5>
+                    <p>We are online always to solve customer problems</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/book7.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block" style="background: #0000009e;border-radius: 84px;">
+                    <h5 style="color: currentcolor;">Asia's biggest online book store</h5>
+                    <p>50 % discount for regular customers</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/book8.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block" style="background: #0000009e;border-radius: 84px;">
+                    <h5 style="color: currentcolor;">Prime membership</h5>
+                    <p>In prime membership upto 75 % discount for any customers</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="container-fluid " style="background:radial-gradient(black, transparent);">
+    <div class="container">
+        <div class="container" xmlns:data="http://www.w3.org/1999/xhtml">
+            {% for product, range, nslides in allProds %}
+            <h2>{{product.0.subcatagory}} {{product.0.catagory}}</h2>
+            <div class="row">
+                <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">'
+                    <ul class="carousel-indicators">
+                        <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+                        {% for i in range %}
+                        <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}"></li>
+                        {% endfor %}
+                    </ul>
+
+                    <!--        slideshow starts here-->
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+
+                            <div class="col-xs-3 col-sm-3 col-md-3">
+                                <div class="card align-items-center" style="width: 18rem;">
+                                    <img src="/media/{{product.0.image}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="namepr{{product.0.id}}">{{product.0.product_name}}
+                                        </h5>
+                                        <h6 class="card-title">{{product.0.Author}}</h6>
+                                        <p class="card-text">{{product.0.desc2|slice:"1:20"}}...</p>
+                                        <h6 class="card-title">&#x20b9; <span
+                                                id="pricepr{{product.0.price}}">{{product.0.price}}</span></h6>
+                                        <span id="divpr{{product.0.id}}" class="divpr">
+                                            <button id="pr{{product.0.id}}" class="btn btn-primary cart">Add to
+                                                cart</button>
+                                        </span>
+                                        <a href="/productview/{{product.0.id}}"><button id="qv{{product.0.id}}"
+                                                class="btn btn-primary ">View</button></a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            {% for i in product|slice:"1:" %}
+                            <div class="col-xs-3 col-sm-3 col-md-3">
+                                <div class="card align-items-center" style="width: 18rem;">
+                                    <img src="/media/{{i.image}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
+                                        <h6 class="card-title">{{i.Author}}</h6>
+                                        <p class="card-text">{{i.desc2|slice:"0:20"}}...</p>
+                                        <h6 class="card-title">&#x20b9;<span id="pricepr{{i.price}}"> {{i.price}}
+                                            </span></h6>
+                                        <span id="divpr{{i.id}}" class="divpr">
+                                            <button id="pr{{i.id}}" class="btn btn-primary cart">Add to cart</button>
+                                        </span>
+                                        <a href="/productview/{{i.id}}"><button id="qv{{i.id}}"
+                                                class="btn btn-primary">View</button></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+                        </div>
+                        <div class="carousel-item">
+                            {% endif%}
+
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- left and right controls for the slide -->
+                <a class="carousel-control-prev   href=" #demo{{forloop.counter}}" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#demo{{forloop.counter}}" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+<style>
+    .col-md-3 {
+        display: inline-block;
+        margin-left: -4px;
+    }
+
+    .col-md-3 img {
+        width: 255px;
+        height: 355px;
+    }
+
+    body .carousel-control-indicator li {
+        background-color: blue;
+    }
+
+    body .carousel-control-prev-icon body .carousel-control-next-icon {
+        background-color: blue;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        top: auto;
+        bottom: auto;
+        padding-top: 500px;
+    }
+
+    body .no-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .carousel-control-prev-icon {
+        background: black no-repeat center center;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
+    }
+
+    .carousel-control-next-icon {
+        background: black no-repeat center center;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
+
+    }
+
+    body .carousel-indicators {
+        bottom: 0;
+    }
+
+    .carousel-indicators .active {
+        background-color: blue;
+    }
+</style>
+
+<hr style="margin: 25px;">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css'>
+<link rel='stylesheet' href='https://themify.me/wp-content/themes/themify-v32/themify-icons/themify-icons.css'>
+<style>
+    body {
+        background: #fbfbfd;
+    }
+
+    .new_footer_area {
+        background: #fbfbfd;
+    }
+
+
+    .new_footer_top {
+        padding: 120px 0px 270px;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    .new_footer_area .footer_bottom {
+        padding-top: 5px;
+        padding-bottom: 50px;
+    }
+
+    .footer_bottom {
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 20px;
+        color: #7f88a6;
+        padding: 27px 0px;
+    }
+
+    .new_footer_top .company_widget p {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 28px;
+        color: #6a7695;
+        margin-bottom: 20px;
+    }
+
+    .new_footer_top .company_widget .f_subscribe_two .btn_get {
+        border-width: 1px;
+        margin-top: 20px;
+    }
+
+    .btn_get_two:hover {
+        background: transparent;
+        color: #5e2ced;
+    }
+
+    .btn_get:hover {
+        color: #fff;
+        background: #6754e2;
+        border-color: #6754e2;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    a:hover,
+    a:focus,
+    .btn:hover,
+    .btn:focus,
+    button:hover,
+    button:focus {
+        text-decoration: none;
+        outline: none;
+    }
+
+
+
+    .new_footer_top .f_widget.about-widget .f_list li a:hover {
+        color: #5e2ced;
+    }
+
+    .new_footer_top .f_widget.about-widget .f_list li {
+        margin-bottom: 11px;
+    }
+
+    .f_widget.about-widget .f_list li:last-child {
+        margin-bottom: 0px;
+    }
+
+    .f_widget.about-widget .f_list li {
+        margin-bottom: 15px;
+    }
+
+    .f_widget.about-widget .f_list {
+        margin-bottom: 0px;
+    }
+
+    .new_footer_top .f_social_icon a {
+        width: 44px;
+        height: 44px;
+        line-height: 43px;
+        background: transparent;
+        border: 1px solid #e2e2eb;
+        font-size: 24px;
+    }
+
+    .f_social_icon a {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        font-size: 14px;
+        line-height: 45px;
+        color: #858da8;
+        display: inline-block;
+        background: #ebeef5;
+        text-align: center;
+        -webkit-transition: all 0.2s linear;
+        -o-transition: all 0.2s linear;
+        transition: all 0.2s linear;
+    }
+
+    .ti-facebook:before {
+        content: "\e741";
+    }
+
+    .ti-twitter-alt:before {
+        content: "\e74b";
+    }
+
+    .ti-vimeo-alt:before {
+        content: "\e74a";
+    }
+
+    .ti-pinterest:before {
+        content: "\e731";
+    }
+
+    .btn_get_two {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        background: #5e2ced;
+        border-color: #5e2ced;
+        color: #fff;
+    }
+
+    .btn_get_two:hover {
+        background: transparent;
+        color: #5e2ced;
+    }
+
+    .new_footer_top .f_social_icon a:hover {
+        background: #5e2ced;
+        border-color: #5e2ced;
+        color: white;
+    }
+
+    .new_footer_top .f_social_icon a+a {
+        margin-left: 4px;
+    }
+
+    .new_footer_top .f-title {
+        margin-bottom: 30px;
+        color: #263b5e;
+    }
+
+    .f_600 {
+        font-weight: 600;
+    }
+
+    .f_size_18 {
+        font-size: 18px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: #4b505e;
+    }
+
+    .new_footer_top .f_widget.about-widget .f_list li a {
+        color: #6a7695;
+    }
+
+
+    .new_footer_top .footer_bg {
+        position: absolute;
+        bottom: 0;
+        background: url("http://droitthemes.com/html/saasland/img/seo/footer_bg.png") no-repeat scroll center 0;
+        width: 100%;
+        height: 266px;
+    }
+
+    .new_footer_top .footer_bg .footer_bg_one {
+        background: url("https://1.bp.blogspot.com/-mvKUJFGEc-k/XclCOUSvCnI/AAAAAAAAUAE/jnBSf6Fe5_8tjjlKrunLBXwceSNvPcp3wCLcBGAsYHQ/s1600/volks.gif") no-repeat center center;
+        width: 330px;
+        height: 105px;
+        background-size: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 30%;
+        -webkit-animation: myfirst 22s linear infinite;
+        animation: myfirst 22s linear infinite;
+    }
+
+    .new_footer_top .footer_bg .footer_bg_two {
+        background: url("https://1.bp.blogspot.com/-hjgfxUW1o1g/Xck--XOdlxI/AAAAAAAAT_4/JWYFJl83usgRFMvRfoKkSDGd--_Sv04UQCLcBGAsYHQ/s1600/cyclist.gif") no-repeat center center;
+        width: 88px;
+        height: 100px;
+        background-size: 100%;
+        bottom: 0;
+        left: 38%;
+        position: absolute;
+        -webkit-animation: myfirst 30s linear infinite;
+        animation: myfirst 30s linear infinite;
+    }
+
+
+
+    @-moz-keyframes myfirst {
+        0% {
+            left: -25%;
+        }
+
+        100% {
+            left: 100%;
+        }
+    }
+
+    @-webkit-keyframes myfirst {
+        0% {
+            left: -25%;
+        }
+
+        100% {
+            left: 100%;
+        }
+    }
+
+    @keyframes myfirst {
+        0% {
+            left: -25%;
+        }
+
+        100% {
+            left: 100%;
+        }
+    }
+
+    /*************footer End*****************/
+</style>
+
+<footer class="new_footer_area bg_color">
+    <div class="new_footer_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="f_widget company_widget wow fadeInLeft" data-wow-delay="0.2s"
+                        style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInLeft;">
+                        <img class="mb-4" src="/static/images/Annotation 2020-07-22 001614.png" alt="" width="72"
+                            height="72">
+                        <div class="footer-contact">
+                            <p><span class="label" style="display: flex;"> <b>Address: </b></span><span class="text">
+                                    Hooghly,West
+                                    Bengal,India</span></p>
+                            <p><span class="label" style="display: flex;"> <b>Phone:</b></span><span class="text">+91
+                                    90733 83828, +91
+                                    75958 83075, +91 86978 96919</span></p>
+                            <p><span class="label" style="display: flex;"> <b>Email:</b></span><span
+                                    class="text">das366966@gmail.com,
+                                    shansda685@gmail.com, biswasshubhayan2001@gmail.com</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.4s"
+                        style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;">
+                        <h3 class="f-title f_600 t_color f_size_18">Extras</h3>
+                        <ul class="list-unstyled f_list">
+                            
+                            <li><a href="/aboutus">About Us</a></li>
+                            <li><a href="/contactus">Contact Us</a></li>
+                            <li><a href="/queryus">Query Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.6s"
+                        style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInLeft;">
+                        <h3 class="f-title f_600 t_color f_size_18">Help</h3>
+                        <ul class="list-unstyled f_list">
+                            <li><a href="/terms&condition">Term &amp; conditions</a></li>
+                            <li><a href="/privacy&policy">Privacy & Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="f_widget social-widget pl_70 wow fadeInLeft" data-wow-delay="0.8s"
+                        style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
+                        <h3 class="f-title f_600 t_color f_size_18">Team Solutions</h3>
+                        <div class="f_social_icon">
+                            <a href="#" class="fab fa-facebook"></a>
+                            <a href="#" class="fab fa-twitter"></a>
+                            <a href="#" class="fab fa-linkedin"></a>
+                            <a href="#" class="fab fa-pinterest"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer_bg">
+            <div class="footer_bg_one"></div>
+            <div class="footer_bg_two"></div>
+        </div>
+    </div>
+    <div class="footer_bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-sm-7">
+                    <p class="mb-0 f_400">© Book Bin.. 2020</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+{% endblock body %}
+{% block js %}
+<script>
+    {% if msg|length != 0 %}
+    alert('{{msg}}');
+    window.location.href = "/"
+    {% endif %}
+    // Find out the cart items from localStorage
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        updateCart(cart);
+    }
+    // If the add to cart button is clicked, add/increment the item
+    //$('.cart').click(function() {
+    $('.divpr').on('click', 'button.cart', function () {
+        var idstr = this.id.toString();
+        if (cart[idstr] != undefined) {
+            qty = cart[idstr][0] + 1;
+        } else {
+            qty = 1;
+            name = document.getElementById('name' + idstr).innerHTML;
+            //price = document.getElementById('price' + idstr).innerHTML;
+
+            cart[idstr] = [qty, name];
+        }
+        updateCart(cart);
+    });
+    //Add Popover to cart
+    $('#popcart').popover();
+    updatePopover(cart);
+    function updatePopover(cart) {
+        console.log('We are inside updatePopover');
+        var popStr = "";
+        popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
+        var i = 1;
+        for (var item in cart) {
+            popStr = popStr + "<b>" + i + "</b>. ";
+            popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+            i = i + 1;
+        }
+        popStr = popStr + "</div> <a href='checkout/'><button class='btn btn-primary' id ='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>Clear Cart</button>"
+        console.log(popStr);
+        document.getElementById('popcart').setAttribute('data-content', popStr);
+        $('#popcart').popover('show');
+    }
+    function clearCart() {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        for (var item in cart) {
+            document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-primary cart">Add To Cart</button>'
+        }
+        localStorage.clear();
+        cart = {};
+        updateCart(cart);
+    }
+    function updateCart(cart) {
+        var sum = 0;
+        for (var item in cart) {
+            sum = sum + cart[item][0];
+            document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = sum;
+         
+                
+        console.log(cart);
+        updatePopover(cart);
+    }
+    // If plus or minus button is clicked, change the cart as well as the display value
+    $('.divpr').on("click", "button.minus", function () {
+        a = this.id.slice(7,);
+        cart['pr' + a][0] = cart['pr' + a][0] - 1;
+        cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+        updateCart(cart);
+    });
+    $('.divpr').on("click", "button.plus", function () {
+        a = this.id.slice(6,);
+        cart['pr' + a][0] = cart['pr' + a][0] + 1;
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+        updateCart(cart);
+    });
+</script>
+{% endblock %}
